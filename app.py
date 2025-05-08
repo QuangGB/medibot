@@ -9,8 +9,8 @@ import atexit
 import requests
 
 sent_reminders = {}
-PAGE_ACCESS_TOKEN = 'EAAQT2w79fVABOZCmNdeQ67rgSC3afVw9EeIHK8r5kKfSX5sMjoyf3CGlEeFcsZBinoRZAxrRxDfCdnPXImPEQsVS38NV0OnaZCJW09CnIBbHfBdJahlOtqC5G7oryuoaSxvnsswPuvbrPbFuX5JHWrHBLU8GkkZBJZBnpKf7lvfWK0qZB7EwjgVNjZC16ZAFcsz5N6ZBYwHV4gZCk6LXQFh'
-VERIFY_TOKEN = '251098'
+PAGE_ACCESS_TOKEN = os.environ.get('PAGE_ACCESS_TOKEN')
+VERIFY_TOKEN = os.environ.get('VERIFY_TOKEN')
 DATA_FILE = 'medicines.json'
 
 # ___FLASK APP___
