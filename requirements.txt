@@ -1,4 +1,4 @@
 Flask
-APScheduler
 requests
 gunicorn
+apscheduler
