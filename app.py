@@ -3,9 +3,7 @@ import json
 from datetime import datetime
 import os
 import uuid
-from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
-import atexit
 import requests
 
 sent_reminders = {}
@@ -127,7 +125,12 @@ def webhook():
                             save_data(medicines)
                             send_message_messenger(sender_id, "Cảm ơn bạn đã uống thuốc. Chúc bạn mau khỏe!")
         return "OK", 200
-
+        
+@app.route('/remind')
+def remind():
+    check_and_send_reminders()
+    return "Reminders sent", 200
+    
 def send_message_messenger(recipient_id, message):
     url = 'https://graph.facebook.com/v19.0/me/messages'
     headers = {'Content-Type': 'application/json'}
@@ -167,14 +170,6 @@ def check_and_send_reminders():
         except ValueError:
             print(f"Time format error: {item['time']}")
     save_data(data)
-
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(check_and_send_reminders, 'interval', minutes = 2)  # Check every 2 minutes
-scheduler.start()
-
-#Dam bao scheduler dung khi tat app
-atexit.register(lambda: scheduler.shutdown())
 
 if __name__ == '__main__':
     app.run(debug=True)
