@@ -160,7 +160,7 @@ def check_and_send_reminders():
             if remind_count >= 10:
                 continue
             unique_key = f"{item['id']}_{scheduled_time.strftime('%d-%m-%Y')}_{remind_count}"
-            if unique_key not in sent_reminders and delta % 120 < 60:
+            if unique_key not in sent_reminders and delta % 360 < 60:
                 message = f"Nhắc nhở bạn uống thuốc {item['name']} vào lúc {item['time']}! Tin nhắn nhắc này sẽ lặp lại 2 phút một lần cho đến khi bạn nhắn lại với tôi rằng bạn đã uống thuốc xong."
                 print(message)
                 if item.get('messenger_id'):
